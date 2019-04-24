@@ -3,12 +3,18 @@
 
 $( document ).ready( () => main() );
 
+function parse_text( data )
+{
+    console.log( data );
+}
+
 function main()
 {
     $("#submit-date").click( ()=>
     {
         let input = $(".datepicker-here").val();
-        let api = input.replace( /-/g , "" );
-        // console.log( api );
+        let url = "/api/" + input.replace( /-/g , "" );
+        let ajax = $.ajax({ url });
+        ajax.done( data => parse_text( data ) );
     });
 }

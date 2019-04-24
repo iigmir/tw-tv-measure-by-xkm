@@ -33,7 +33,6 @@ class ApiController < ApplicationController
         render :json => {
             request_id: params[:id],
             date: source[2].text,
-            meta_data: new_meta_data,
             data: new_data
         }
     end
