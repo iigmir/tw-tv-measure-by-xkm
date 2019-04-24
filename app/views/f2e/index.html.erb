@@ -3,15 +3,26 @@
 <div id="app" class="container">
     <div class="row">
         <div class="col-sm">
-            <div class="input-group" >
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button
+                        id="switch-language"
+                        type="button"
+                        class="btn btn-outline-secondary">
+                        En
+                    </button>
+                </div>
                 <input
                     type="text"
+                    id="selected-date"
                     class="form-control datepicker-here"
+                    data-language="en"
+                    data-date-format="yy-mm-dd"
                 />
                 <div class="input-group-append">
                     <button
                         id="submit-date"
-                        class="btn btn-outline-secondary"
+                        class="btn btn-secondary"
                         type="button">
                         Sent
                     </button>

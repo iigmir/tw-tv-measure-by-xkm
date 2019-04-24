@@ -7,6 +7,8 @@ function main()
 {
     $("#submit-date").click( ()=>
     {
-        console.log(123);
+        let input = $(".datepicker-here").val();
+        let api = input.replace( /-/g , "" );
+        // console.log( api );
     });
 }
