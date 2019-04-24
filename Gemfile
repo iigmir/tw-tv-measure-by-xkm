@@ -58,3 +58,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # jQuery
 gem 'jquery-rails'
+# nokogiri for HTML crawl.
+gem 'nokogiri'
