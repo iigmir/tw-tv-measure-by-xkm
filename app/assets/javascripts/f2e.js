@@ -5,8 +5,8 @@ $( document ).ready( () => main() );
 
 function main()
 {
-    $(".datepicker").datepicker({
-        format: "yyyy-mm-dd",
-        startDate: "-3d"
+    $("#submit-date").click( ()=>
+    {
+        console.log(123);
     });
 }
