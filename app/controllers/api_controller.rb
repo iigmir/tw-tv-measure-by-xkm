@@ -9,11 +9,31 @@ class ApiController < ApplicationController
         # Encoding::UndefinedConversionError ("\xA7" from ASCII-8BIT to UTF-8):
         api = "http://www1.xkm.com.tw/hr/DATA/HR" + params[:id] + ".htm"
         doc = Nokogiri::HTML(open(api))
-        john = doc.css("table td")
+        source = doc.css("td")
+        meta_data = source[3, 8]
+        data = source[11, source.length]
+
+        new_meta_data = []
+        new_data = []
+        obj = {}
+        i = 0
+        meta_data.each_with_index { |val,index| new_meta_data.push( val.text ) }
+        data.each_with_index { |val,index|
+            obj[ new_meta_data[i] ] = val.text
+            i += 1
+            if i == new_meta_data.length
+                new_data.push( obj )
+                i = 0
+                obj = {}
+            end
+        }
+
+        
         render :json => {
             request_id: params[:id],
-            # source_html: doc
-            data: john
+            date: source[2].text,
+            meta_data: new_meta_data,
+            data: new_data
         }
     end
     def http_test
