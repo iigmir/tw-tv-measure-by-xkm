@@ -17,7 +17,9 @@ class ApiController < ApplicationController
         new_data = []
         obj = {}
         i = 0
-        meta_data.each_with_index { |val,index| new_meta_data.push( val.text ) }
+        meta_data.each_with_index { |val,index|
+            new_meta_data.push( val.text )
+        }
         data.each_with_index { |val,index|
             obj[ new_meta_data[i] ] = val.text
             i += 1
@@ -28,7 +30,6 @@ class ApiController < ApplicationController
             end
         }
 
-        
         render :json => {
             request_id: params[:id],
             date: source[2].text,
