@@ -12,6 +12,7 @@ class ApiController < ApplicationController
         ic = res.body.encode("utf-8","big5")
         # https://ruby-china.org/topics/101
         # https://stackoverflow.com/questions/33270851/how-can-i-use-nethttp-to-download-a-file-with-utf-8-characters-in-it
+        # Encoding::UndefinedConversionError ("\xA7" from ASCII-8BIT to UTF-8):
         render :json => {
             :request_id => params[:id],
             :source_html => ic
