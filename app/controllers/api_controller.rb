@@ -8,10 +8,26 @@ class ApiController < ApplicationController
         # https://stackoverflow.com/questions/33270851/how-can-i-use-nethttp-to-download-a-file-with-utf-8-characters-in-it
         # Encoding::UndefinedConversionError ("\xA7" from ASCII-8BIT to UTF-8):
         api = "http://www1.xkm.com.tw/hr/DATA/HR" + params[:id] + ".htm"
-        doc = Nokogiri::HTML(open(api))
+        date = ""
+        message = "No data"
+        begin
+            doc = Nokogiri::HTML( open(api) )
+        rescue OpenURI::HTTPError => ex
+            
+            render :json => {
+                message: message,
+                date: date,
+                meta_data:[],
+                data: [],
+            }, status: 404
+            return
+        end
+
         source = doc.css("td")
+        date = source[2].text
         meta_data = source[3, 8]
         data = source[11, source.length]
+        message = "Success. Data length: " + data.length.to_s
 
         new_meta_data = []
         new_data = []
@@ -31,9 +47,10 @@ class ApiController < ApplicationController
         }
 
         render :json => {
-            request_id: params[:id],
-            date: source[2].text,
-            data: new_data
+            message: message,
+            date: date,
+            meta_data: new_meta_data,
+            data: new_data,
         }
     end
     def http_test
