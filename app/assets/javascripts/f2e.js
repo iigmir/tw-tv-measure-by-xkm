@@ -5,8 +5,6 @@ $( document ).ready( () => main() );
 
 function main()
 {
-    console.log("Hello");
     $("h1").addClass("foo");
     $("#ax").html("<p> Hi </p>");
-    console.log( $("#ax").html );
 }
