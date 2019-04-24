@@ -5,6 +5,13 @@ $( document ).ready( () => main() );
 
 function main()
 {
-    $("h1").addClass("foo");
-    $("#ax").html("<p> Hi </p>");
+    let test = () =>
+    {
+        $("h1").addClass("foo");
+        $("#ax").html("<p> Hi </p>");
+    };
+    $(".datepicker").datepicker({
+        format: "yyyy-mm-dd",
+        startDate: "-3d"
+    });
 }
