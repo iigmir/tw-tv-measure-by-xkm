@@ -51,17 +51,6 @@ function error_msg( data )
 
 function main()
 {
-    $(".datepicker-here").datepicker({
-        onSelect: function(formattedDate, date, inst)
-        {
-            let url = "/api/" + formattedDate.replace( /-/g , "" );
-            $("#api-info a").attr( "href", url );
-            $("#api-info a").text( date.toLocaleDateString() + " 時的資料。" );
-            $(".datepicker-here").datepicker().data("datepicker").hide();
-            $("#api-info .alert").attr( "hidden", false );
-        }
-    });
-    
     $("#submit-date").click( ()=>
     {
         // Declear vars
@@ -69,10 +58,14 @@ function main()
         let url = "/api/" + input.replace( /-/g , "" );
         let ajax = $.ajax({ url });
         // Clear old data
-        $("#response-data").attr( "hidden", true );
-        $("#ajax-error").attr( "hidden", true );
         $("#response-data table thead").html("");
         $("#response-data table tbody").html("");
+        // Add API info
+        $("#api-info a").attr( "href", url );
+        // Hidden Change
+        $("#api-info .alert").attr( "hidden", false );
+        $("#response-data").attr( "hidden", true );
+        $("#ajax-error").attr( "hidden", true );
         // AJAX action
         ajax.done( data => parse_text(data) );
         ajax.error( data => error_msg(data) );
