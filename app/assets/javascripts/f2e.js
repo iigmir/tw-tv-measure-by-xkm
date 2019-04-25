@@ -7,12 +7,11 @@ function parse_text( res_data )
 {
     function render_tbody({ item })
     {
-        let render_thtd = (item_keys_item, item_keys_index, meta_data) =>
+        let render_thtd = (item_keys_item, item_keys_index) =>
         {   // <th scope="col">${ value0 }</th><td>${ value1 }</td><td>${ value2 }</td>
             let th = `<th scope="row">${ item[item_keys_item] }</th>`;
             let td = `<td>${ item[item_keys_item] }</td>`;
             return item_keys_index === 0 ? th : td;
-            // return td;
         };
         let item_keys = Object.keys(item);
         let elem = item_keys.map(
@@ -26,10 +25,10 @@ function parse_text( res_data )
     let thead_data = "";
     let tbody_data = "";
     let meta_data = res_data.meta_data;
-    console.log( res_data );
+    let data = res_data.data;
     // Data render
     meta_data.map( m => thead_data += `<th scope="col">${ m }</th>` );
-    res_data.data.map( item => render_tbody({ item, tbody_data }) );
+    data.map( item => render_tbody({ item, tbody_data }) );
     thead_data = `<tr>${ thead_data }</tr>`;
     // Put datas
     $("#response-data table thead").append(thead_data);

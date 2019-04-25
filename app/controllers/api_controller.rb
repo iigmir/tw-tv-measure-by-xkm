@@ -10,6 +10,7 @@ class ApiController < ApplicationController
         api = "http://www1.xkm.com.tw/hr/DATA/HR" + params[:id] + ".htm"
         date = ""
         message = "No data"
+        last_data = ""
         begin
             doc = Nokogiri::HTML( open(api) )
         rescue OpenURI::HTTPError => ex
@@ -19,6 +20,7 @@ class ApiController < ApplicationController
                 date: date,
                 meta_data:[],
                 data: [],
+                last_data: last_data
             }, status: 404
             return
         end
@@ -45,12 +47,15 @@ class ApiController < ApplicationController
                 obj = {}
             end
         }
+        last_data = new_data[ new_data.length - 1 ]
+        new_data = new_data[ 0, new_data.length - 2 ]
 
         render :json => {
             message: message,
             date: date,
             meta_data: new_meta_data,
             data: new_data,
+            last_data: last_data
         }
     end
     def http_test
