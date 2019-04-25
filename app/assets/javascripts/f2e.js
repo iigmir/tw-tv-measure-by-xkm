@@ -51,6 +51,17 @@ function error_msg( data )
 
 function main()
 {
+    $(".datepicker-here").datepicker({
+        onSelect: function(formattedDate, date, inst)
+        {
+            let url = "/api/" + formattedDate.replace( /-/g , "" );
+            $("#api-info a").attr( "href", url );
+            $("#api-info a").text( date.toLocaleDateString() + " 時的資料。" );
+            $(".datepicker-here").datepicker().data("datepicker").hide();
+            $("#api-info .alert").attr( "hidden", false );
+        }
+    });
+    
     $("#submit-date").click( ()=>
     {
         // Declear vars
