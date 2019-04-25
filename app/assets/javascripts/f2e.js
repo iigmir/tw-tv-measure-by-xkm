@@ -5,6 +5,7 @@ $( document ).ready( () => main() );
 
 function parse_text( res_data )
 {
+    // Declear vars
     function render_tbody({ item })
     {
         let render_thtd = (item_keys_item, item_keys_index) =>
@@ -21,7 +22,6 @@ function parse_text( res_data )
         tbody_data += elem;
         return;
     }
-    // Declear vars
     let thead_data = "";
     let tbody_data = "";
     let meta_data = res_data.meta_data;
@@ -42,6 +42,7 @@ function parse_text( res_data )
 function error_msg( data )
 {
     $("#ajax-error .alert").text( "Data error: " + data.responseJSON.message );
+    // Hidden action
     $("#response-data").attr( "hidden", true );
     $("#ajax-error").attr( "hidden", false );
     console.error( data );
@@ -52,9 +53,16 @@ function main()
 {
     $("#submit-date").click( ()=>
     {
+        // Declear vars
         let input = $(".datepicker-here").val();
         let url = "/api/" + input.replace( /-/g , "" );
         let ajax = $.ajax({ url });
+        // Clear old data
+        $("#response-data").attr( "hidden", true );
+        $("#ajax-error").attr( "hidden", true );
+        $("#response-data table thead").html("");
+        $("#response-data table tbody").html("");
+        // AJAX action
         ajax.done( data => parse_text(data) );
         ajax.error( data => error_msg(data) );
     });
