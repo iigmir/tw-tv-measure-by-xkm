@@ -1,6 +1,13 @@
 <h1 class="text-center"> 潤利公司【家庭收視率】 API </h1>
 
 <div id="app" class="container">
+    <div id="ajax-error" class="row" hidden>
+        <div class="col-sm">
+            <div class="alert alert-danger" role="alert">
+                Error!
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm">
             <div class="input-group">
@@ -30,6 +37,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div id="response-data" class="row" hidden>
+        <div class="col-sm">
+            <table class="table">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </div>
