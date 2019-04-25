@@ -41,10 +41,10 @@ function parse_text( res_data )
 
 function error_msg( data )
 {
-    console.error( data );
+    $("#ajax-error .alert").text( "Data error: " + data.responseJSON.message );
     $("#response-data").attr( "hidden", true );
     $("#ajax-error").attr( "hidden", false );
-    $("#ajax-error .alert").text( "Data error: " + data.responseJSON.message );
+    console.error( data );
     return;
 }
 
